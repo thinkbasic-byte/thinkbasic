@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UEIH CASIO - TSA Luyện Đề</title>
+  <title>ThinkBasic - Luyện Thi TSA</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -21,7 +21,6 @@
       position: relative;
     }
 
-    /* Canvas nền hiệu ứng ngôi sao */
     #star-canvas {
       position: fixed;
       top: 0;
@@ -48,6 +47,7 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       position: sticky;
       top: 0;
+      z-index: 10;
     }
 
     .nav-brand {
@@ -57,18 +57,18 @@
       text-decoration: none;
       color: white;
       font-weight: 800;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
     }
 
     .logo-box {
       width: 36px;
       height: 36px;
-      background: #ef4444;
+      background: linear-gradient(135deg, #ef4444, #dc2626);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       font-weight: 900;
       box-shadow: 0 0 12px rgba(239, 68, 68, 0.5);
     }
@@ -99,6 +99,7 @@
       padding: 6px 14px;
       border-radius: 999px;
       font-size: 0.85rem;
+      font-weight: 600;
     }
 
     /* Hero */
@@ -127,8 +128,10 @@
     }
 
     .hero-title span {
-      color: #ef4444;
-      text-shadow: 0 0 25px rgba(239, 68, 68, 0.4);
+      background: linear-gradient(to right, #ff3344, #ff7b00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 25px rgba(255, 51, 68, 0.3);
     }
 
     .hero-sub {
@@ -229,6 +232,42 @@
       font-size: 1.2rem;
     }
 
+    /* Bảng File Tài Liệu */
+    .file-section {
+      background: rgba(18, 24, 38, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 30px;
+    }
+
+    .file-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      margin-top: 12px;
+      transition: all 0.2s;
+    }
+
+    .file-item:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .file-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .file-info i {
+      font-size: 1.5rem;
+    }
+
     /* Đề thi */
     #exam-box {
       display: none;
@@ -268,30 +307,30 @@
     <!-- Navbar -->
     <header class="navbar">
       <a href="#" class="nav-brand">
-        <div class="logo-box">UEIH</div>
-        <div>Ueih Casio</div>
+        <div class="logo-box">TB</div>
+        <div>ThinkBasic</div>
       </a>
       <ul class="nav-links">
         <li><a href="#" class="active">Trang chủ</a></li>
+        <li><a href="#files">Kho Tài Liệu</a></li>
+        <li><a href="#exam-box" onclick="startExam()">Luyện Thi TSA</a></li>
         <li><a href="#">Kỹ năng Casio</a></li>
-        <li><a href="#exam-box" onclick="startExam()">Kho Đề Thi</a></li>
-        <li><a href="#">Yêu thích</a></li>
       </ul>
       <div class="nav-user">
         <i class="fa-solid fa-user-circle"></i>
-        <span>yêu em bông</span>
+        <span>ThinkBasic</span>
       </div>
     </header>
 
     <!-- Hero -->
     <section class="hero">
       <img class="hero-img" src="https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=300&q=80" alt="Logo">
-      <h1 class="hero-title">UEIH <span>CASIO</span></h1>
-      <p class="hero-sub">Casio Lẹ Lẹ Rồi Chuyển Câu Thoi 🍼</p>
+      <h1 class="hero-title">THINK<span>BASIC</span></h1>
+      <p class="hero-sub">Luyện Thi TSA & Thủ Thuật Casio Đỉnh Cao 🚀</p>
 
       <div class="btn-group">
-        <button class="btn btn-red" onclick="startExam()"><i class="fa-solid fa-play"></i> Vào học luôn</button>
-        <button class="btn btn-glass"><i class="fa-solid fa-file-excel"></i> Mở File Sheet</button>
+        <button class="btn btn-red" onclick="startExam()"><i class="fa-solid fa-play"></i> Vào thi thử ngay</button>
+        <a href="#files" class="btn btn-glass"><i class="fa-solid fa-folder-open"></i> Kho Tài Liệu File</a>
         <button class="btn btn-glass"><i class="fa-solid fa-bookmark"></i> Bài đã lưu</button>
       </div>
     </section>
@@ -299,30 +338,60 @@
     <!-- Nội dung chính -->
     <main class="container">
       <div class="notice">
-        <h3>Thông báo</h3>
+        <h3>Thông báo từ ThinkBasic</h3>
         <div class="progress-line"></div>
-        <p style="color: #94a3b8; font-size: 0.9rem;">Hệ thống bài thi thử TSA trực tuyến đã sẵn sàng. Nhấn nút "Vào học luôn" để bắt đầu làm bài.</p>
+        <p style="color: #94a3b8; font-size: 0.9rem;">Chào mừng bạn đến với hệ thống ThinkBasic. Tải tài liệu bên dưới hoặc bấm nút "Vào thi thử ngay" để làm bài!</p>
       </div>
 
       <div class="cards-grid">
         <div class="card-item">
           <div class="icon-circle" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;"><i class="fa-solid fa-bolt"></i></div>
           <h4 style="margin-bottom: 8px;">Tốc Độ Ánh Sáng</h4>
-          <p style="color: #94a3b8; font-size: 0.85rem;">Phương pháp bấm máy giúp tiết kiệm 70% thời gian làm bài.</p>
+          <p style="color: #94a3b8; font-size: 0.85rem;">Phương pháp tư duy và bấm máy giúp tối ưu thời gian làm bài.</p>
         </div>
 
         <div class="card-item">
           <div class="icon-circle" style="background: rgba(168, 85, 247, 0.15); color: #a855f7;"><i class="fa-solid fa-brain"></i></div>
-          <h4 style="margin-bottom: 8px;">Tư Duy Casio</h4>
-          <p style="color: #94a3b8; font-size: 0.85rem;">Không chỉ là bấm máy, mà là tư duy giải toán trắc nghiệm.</p>
+          <h4 style="margin-bottom: 8px;">Tư Duy Bản Chất</h4>
+          <p style="color: #94a3b8; font-size: 0.85rem;">Hiểu bản chất công thức kết hợp kỹ năng loại trừ đáp án nhanh.</p>
         </div>
 
         <div class="card-item">
           <div class="icon-circle" style="background: rgba(249, 115, 22, 0.15); color: #f97316;"><i class="fa-solid fa-fire"></i></div>
-          <h4 style="margin-bottom: 8px;">Độc Quyền Ueih</h4>
-          <p style="color: #94a3b8; font-size: 0.85rem;">Các tuyệt chiêu chỉ được chia sẻ nội bộ tại đây.</p>
+          <h4 style="margin-bottom: 8px;">Đề Thi Chuẩn Cấu Trúc</h4>
+          <p style="color: #94a3b8; font-size: 0.85rem;">Tổng hợp các đề thi thử TSA bám sát đề thi chính thức.</p>
         </div>
       </div>
+
+      <!-- Khu vực Kho File & Tài Liệu -->
+      <section class="file-section" id="files">
+        <h3 style="margin-bottom: 8px;"><i class="fa-solid fa-download"></i> Kho Tải File & Đề Thi</h3>
+        <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 16px;">(Thay đường link href bằng link Drive của bạn hoặc tên file trên GitHub)</p>
+
+        <!-- File 1: Đề thi PDF -->
+        <div class="file-item">
+          <div class="file-info">
+            <i class="fa-solid fa-file-pdf" style="color: #ef4444;"></i>
+            <div>
+              <div style="font-weight: 700;">Đề thi thử TSA 2026 - Đề số 01 (PDF)</div>
+              <div style="color: #64748b; font-size: 0.75rem;">Dung lượng: 2.4 MB</div>
+            </div>
+          </div>
+          <a href="#" class="btn btn-glass" style="padding: 8px 16px; font-size: 0.85rem;"><i class="fa-solid fa-arrow-down"></i> Tải về</a>
+        </div>
+
+        <!-- File 2: Bảng tra cứu / Excel -->
+        <div class="file-item">
+          <div class="file-info">
+            <i class="fa-solid fa-file-excel" style="color: #22c55e;"></i>
+            <div>
+              <div style="font-weight: 700;">Bảng tổng hợp công thức Casio nhanh (Excel)</div>
+              <div style="color: #64748b; font-size: 0.75rem;">Dung lượng: 1.1 MB</div>
+            </div>
+          </div>
+          <a href="#" class="btn btn-glass" style="padding: 8px 16px; font-size: 0.85rem;"><i class="fa-solid fa-arrow-down"></i> Tải về</a>
+        </div>
+      </section>
 
       <!-- Khu vực bài thi -->
       <div id="exam-box">
@@ -351,7 +420,6 @@
     </main>
   </div>
 
-  <!-- Nền hạt chuyển động nhẹ nhàng -->
   <script>
     const canvas = document.getElementById('star-canvas');
     const ctx = canvas.getContext('2d');
