@@ -81,4 +81,110 @@
       font-size: 0.95rem;
       color: #94a3b8;
       margin-bottom: 28px;
-      line-height: 1.
+      line-height: 1.5;
+    }
+
+    /* Danh sách các nút liên kết */
+    .links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .link-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      color: #f1f5f9;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.25s ease;
+    }
+
+    .link-item .left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .link-item i {
+      font-size: 1.25rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    .link-item:hover {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: rgba(129, 140, 248, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.3);
+    }
+
+    /* Footer nhỏ */
+    .footer {
+      margin-top: 32px;
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Ảnh đại diện -->
+    <div class="avatar-wrapper">
+      <img class="avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=300&q=80" alt="Avatar">
+      <div class="status-dot"></div>
+    </div>
+
+    <!-- Tên & Mô tả -->
+    <h1>ThinkBasic</h1>
+    <p class="bio">Chào mừng bạn ghé thăm trang cá nhân của mình! Kết nối với mình qua các liên kết bên dưới nhé.</p>
+
+    <!-- Các nút liên kết -->
+    <div class="links-list">
+      <a href="https://facebook.com" target="_blank" class="link-item">
+        <div class="left">
+          <i class="fa-brands fa-facebook" style="color: #1877f2;"></i>
+          <span>Facebook</span>
+        </div>
+        <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem; color: #64748b;"></i>
+      </a>
+
+      <a href="https://zalo.me" target="_blank" class="link-item">
+        <div class="left">
+          <i class="fa-solid fa-comment-dots" style="color: #0ea5e9;"></i>
+          <span>Zalo Chat</span>
+        </div>
+        <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem; color: #64748b;"></i>
+      </a>
+
+      <a href="https://github.com" target="_blank" class="link-item">
+        <div class="left">
+          <i class="fa-brands fa-github" style="color: #f8fafc;"></i>
+          <span>GitHub</span>
+        </div>
+        <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem; color: #64748b;"></i>
+      </a>
+
+      <a href="mailto:example@gmail.com" class="link-item">
+        <div class="left">
+          <i class="fa-solid fa-envelope" style="color: #f43f5e;"></i>
+          <span>Gửi Email</span>
+        </div>
+        <i class="fa-solid fa-chevron-right" style="font-size: 0.8rem; color: #64748b;"></i>
+      </a>
+    </div>
+
+    <div class="footer">
+      © 2026 ThinkBasic. Hosted on Render.
+    </div>
+  </div>
+
+</body>
+</html>
