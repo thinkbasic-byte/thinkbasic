@@ -583,3 +583,19 @@
           if (d < 85) {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = 'rgba(56, 189, 248,' + (0.16 * (1 - d / 85)) + ')';
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    resizeCanvas();
+    animate();
+  </script>
+</body>
+</html>
