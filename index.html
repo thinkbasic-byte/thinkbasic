@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>thinkbasic tdzz.</title>
+  <title>ThinkBasic - Luyện Đề TSA & HSA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -15,8 +15,8 @@
       --secondary: #818cf8;
       --accent: #f43f5e;
       --bg: #070913;
-      --card-bg: rgba(15, 20, 36, 0.85);
-      --border: rgba(255, 255, 255, 0.08);
+      --card-bg: rgba(15, 20, 36, 0.78);
+      --border: rgba(255, 255, 255, 0.1);
     }
 
     * {
@@ -28,12 +28,45 @@
 
     body {
       background-color: var(--bg);
-      background-image: 
-        radial-gradient(circle at 20% 15%, rgba(56, 189, 248, 0.12) 0%, transparent 40%),
-        radial-gradient(circle at 80% 80%, rgba(244, 63, 94, 0.1) 0%, transparent 40%);
       color: #f1f5f9;
       min-height: 100vh;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Canvas nền chứa hạt né chuột */
+    #particle-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* Hiệu ứng hào quang nền lập lòe */
+    .glow-light {
+      position: fixed;
+      width: 550px;
+      height: 550px;
+      border-radius: 50%;
+      filter: blur(140px);
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.22;
+      animation: floatLight 10s infinite alternate ease-in-out;
+    }
+    .light-1 { top: -120px; left: 15%; background: #00f2fe; }
+    .light-2 { bottom: -100px; right: 10%; background: #f43f5e; animation-delay: -5s; }
+
+    @keyframes floatLight {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(50px, 40px) scale(1.18); }
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 10;
     }
 
     /* Navbar */
@@ -41,9 +74,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px 40px;
-      background: rgba(7, 9, 19, 0.9);
-      backdrop-filter: blur(16px);
+      padding: 18px 48px;
+      background: rgba(7, 9, 19, 0.85);
+      backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
@@ -58,17 +91,17 @@
     }
 
     .brand-icon {
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 900;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: #070913;
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
     }
 
     .nav-links {
@@ -83,8 +116,8 @@
       color: #94a3b8;
       font-size: 0.95rem;
       font-weight: 600;
-      padding: 8px 16px;
-      border-radius: 10px;
+      padding: 8px 18px;
+      border-radius: 12px;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -94,20 +127,27 @@
 
     .nav-btn:hover {
       color: var(--primary);
-      background: rgba(56, 189, 248, 0.08);
+      background: rgba(56, 189, 248, 0.1);
     }
 
     .nav-btn.active {
       color: #fff;
-      background: rgba(56, 189, 248, 0.15);
-      border: 1px solid rgba(56, 189, 248, 0.3);
+      background: rgba(56, 189, 248, 0.16);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.2);
     }
 
-    /* Container & Slide */
+    /* Các Slide */
     .page-slide {
       max-width: 1050px;
       margin: 40px auto 80px;
       padding: 0 24px;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     /* Hero */
@@ -122,17 +162,18 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 18px;
-      background: rgba(255, 255, 255, 0.04);
+      padding: 8px 20px;
+      background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border);
       border-radius: 99px;
       font-size: 0.85rem;
       color: #cbd5e1;
       margin-bottom: 24px;
+      backdrop-filter: blur(10px);
     }
 
     .hero-title {
-      font-size: 3.4rem;
+      font-size: 3.6rem;
       font-weight: 900;
       line-height: 1.15;
       letter-spacing: -1px;
@@ -143,258 +184,13 @@
       background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #f43f5e 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 35px rgba(56, 189, 248, 0.4));
     }
 
     .hero-desc {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       color: #94a3b8;
       max-width: 620px;
       margin: 0 auto 36px;
       line-height: 1.6;
     }
-
-    .btn {
-      padding: 12px 22px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      border: none;
-      transition: all 0.25s;
-      text-decoration: none;
-    }
-
-    .btn-glow {
-      background: linear-gradient(135deg, #38bdf8, #6366f1);
-      color: #070913;
-      box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.4);
-    }
-
-    .btn-glow:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(99, 102, 241, 0.5);
-      color: #fff;
-    }
-
-    .btn-glass {
-      background: rgba(255, 255, 255, 0.05);
-      color: white;
-      border: 1px solid var(--border);
-    }
-
-    .btn-glass:hover {
-      background: rgba(255, 255, 255, 0.12);
-      transform: translateY(-2px);
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      margin-top: 40px;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 30px 24px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    .card-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.35rem;
-      margin-bottom: 20px;
-    }
-
-    .ic-cyan { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
-    .ic-rose { background: rgba(244, 63, 94, 0.15); color: #f43f5e; }
-
-    .panel-box {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 36px;
-    }
-
-    .panel-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 24px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 16px;
-    }
-
-    .file-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 24px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      margin-bottom: 16px;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 60px 20px;
-      color: #64748b;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Header -->
-  <header class="navbar">
-    <div class="brand" onclick="switchSlide('home')">
-      <div class="brand-icon">TB</div>
-      <div>
-        <div style="font-weight: 800; font-size: 1.15rem; letter-spacing: 0.5px;">THINKBASIC</div>
-        <div style="font-size: 0.65rem; color: #64748b; font-weight: 700; letter-spacing: 1px;">KHO ĐỀ THI 2026</div>
-      </div>
-    </div>
-
-    <nav class="nav-links">
-      <button class="nav-btn active" id="btn-home" onclick="switchSlide('home')">
-        <i class="fa-solid fa-house"></i> Trang chủ
-      </button>
-      <button class="nav-btn" id="btn-tsa" onclick="switchSlide('tsa')">
-        <i class="fa-solid fa-graduation-cap"></i> Đề thi TSA
-      </button>
-      <button class="nav-btn" id="btn-hsa" onclick="switchSlide('hsa')">
-        <i class="fa-solid fa-book-open"></i> Đề thi HSA
-      </button>
-    </nav>
-  </header>
-
-  <!-- Slide 1: Trang chủ -->
-  <section class="page-slide" id="slide-home" style="display: block;">
-    <div class="hero">
-      <div class="pill-tag">
-        <i class="fa-solid fa-bolt" style="color: var(--primary);"></i> Cập nhật ngân hàng đề thi chuẩn mới nhất
-      </div>
-      <h1 class="hero-title">
-        KHO ĐỀ THI THỬ <br>
-        <span class="gradient-word">TSA & HSA 2026</span>
-      </h1>
-      <p class="hero-desc">
-        Tổng hợp toàn bộ đề thi chính thức, đề thi thử có lời giải chi tiết cho kỳ thi Đánh giá tư duy (TSA) và Đánh giá năng lực (HSA).
-      </p>
-
-      <div style="display: flex; justify-content: center; gap: 16px;">
-        <button class="btn btn-glow" onclick="switchSlide('tsa')">
-          <i class="fa-solid fa-graduation-cap"></i> Xem Đề Thi TSA
-        </button>
-        <button class="btn btn-glass" onclick="switchSlide('hsa')">
-          <i class="fa-solid fa-book-open"></i> Xem Đề Thi HSA
-        </button>
-      </div>
-    </div>
-
-    <div class="cards-grid">
-      <div class="card" onclick="switchSlide('tsa')">
-        <div class="card-icon ic-cyan"><i class="fa-solid fa-graduation-cap"></i></div>
-        <h3 style="margin-bottom: 8px;">Kỳ Thi TSA (ĐHBK Hà Nội)</h3>
-        <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">Đề thi Đánh giá tư duy: Toán, Đọc hiểu, Khoa học. Đã cập nhật đề chính thức đợt 1 2026.</p>
-      </div>
-
-      <div class="card" onclick="switchSlide('hsa')">
-        <div class="card-icon ic-rose"><i class="fa-solid fa-book-open"></i></div>
-        <h3 style="margin-bottom: 8px;">Kỳ Thi HSA (ĐHQG Hà Nội)</h3>
-        <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">Đề thi Đánh giá năng lực: Định lượng, Định tính và Khoa học. Hệ thống đang tổng hợp.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Slide 2: Đề thi TSA -->
-  <section class="page-slide" id="slide-tsa" style="display: none;">
-    <div class="panel-box">
-      <div class="panel-header">
-        <div>
-          <h2 style="font-size: 1.5rem; font-weight: 800;"><i class="fa-solid fa-graduation-cap" style="color: var(--primary); margin-right: 10px;"></i> Đề Thi Đánh Giá Tư Duy (TSA)</h2>
-          <p style="color: #94a3b8; font-size: 0.88rem; margin-top: 4px;">Tổng hợp đề thi chính thức và đề thi thử TSA Đại học Bách Khoa Hà Nội</p>
-        </div>
-        <button class="btn btn-glass" onclick="switchSlide('home')" style="padding: 8px 16px; font-size: 0.85rem;">
-          <i class="fa-solid fa-arrow-left"></i> Về Trang Chủ
-        </button>
-      </div>
-
-      <!-- Khối hiển thị đề thi AECK -->
-      <div class="file-item">
-        <div style="display: flex; align-items: center; gap: 16px;">
-          <i class="fa-solid fa-file-pdf" style="font-size: 2.2rem; color: #f43f5e;"></i>
-          <div>
-            <div style="font-weight: 800; font-size: 1.05rem; color: #fff;">Đề chính thức đợt 1 2026 (AECK)</div>
-            <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 4px;">
-              Đánh giá tư duy TSA 2026 • 3 phần thi (Toán, Đọc hiểu, Khoa học) • Kíp 1 - 2 - 3 • 57 trang
-            </div>
-          </div>
-        </div>
-        <div style="display: flex; gap: 10px;">
-          <a href="https://drive.google.com/file/d/17L1vDVaYc9jIzuHwhCiDDjFGn_TIHsOV/view?usp=sharing" target="_blank" class="btn btn-glass" style="padding: 8px 16px; font-size: 0.85rem;">
-            <i class="fa-solid fa-eye"></i> Xem đề
-          </a>
-          <a href="https://drive.google.com/u/0/uc?id=17L1vDVaYc9jIzuHwhCiDDjFGn_TIHsOV&export=download" target="_blank" class="btn btn-glow" style="padding: 8px 18px; font-size: 0.85rem;">
-            <i class="fa-solid fa-download"></i> Tải về
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Slide 3: Đề thi HSA -->
-  <section class="page-slide" id="slide-hsa" style="display: none;">
-    <div class="panel-box">
-      <div class="panel-header">
-        <div>
-          <h2 style="font-size: 1.5rem; font-weight: 800;"><i class="fa-solid fa-book-open" style="color: var(--accent); margin-right: 10px;"></i> Đề Thi Đánh Giá Năng Lực (HSA)</h2>
-          <p style="color: #94a3b8; font-size: 0.88rem; margin-top: 4px;">Kho đề thi Đánh giá năng lực Đại học Quốc gia Hà Nội</p>
-        </div>
-        <button class="btn btn-glass" onclick="switchSlide('home')" style="padding: 8px 16px; font-size: 0.85rem;">
-          <i class="fa-solid fa-arrow-left"></i> Về Trang Chủ
-        </button>
-      </div>
-
-      <div class="empty-state">
-        <i class="fa-solid fa-cloud-arrow-up" style="font-size: 3rem; margin-bottom: 16px; color: #475569;"></i>
-        <h3 style="color: #cbd5e1; margin-bottom: 8px;">Chưa có tài liệu trong mục này</h3>
-        <p style="font-size: 0.9rem;">Hệ thống đang tổng hợp và sẽ sớm cập nhật các bộ đề thi thử HSA 2026.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Script chuyển Slide an toàn -->
-  <script>
-    function switchSlide(slideId) {
-      const slides = ['home', 'tsa', 'hsa'];
-      slides.forEach(id => {
-        const el = document.getElementById('slide-' + id);
-        const btn = document.getElementById('btn-' + id);
-        if (el) el.style.display = (id === slideId) ? 'block' : 'none';
-        if (btn) {
-          if (id === slideId) btn.classList.add('active');
-          else btn.classList.remove('active');
-        }
-      });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  </script>
-</body>
-</html>
