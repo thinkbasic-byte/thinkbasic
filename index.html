@@ -426,4 +426,160 @@
             </div>
           </div>
           <div style="display: flex; gap: 10px;">
-            <a href="
+            <a href="https://drive.google.com/file/d/17L1vDVaYc9jIzuHwhCiDDjFGn_TIHsOV/view?usp=sharing" target="_blank" class="btn btn-glass" style="padding: 8px 16px; font-size: 0.85rem;">
+              👁️ Xem đề
+            </a>
+            <a href="https://drive.google.com/u/0/uc?id=17L1vDVaYc9jIzuHwhCiDDjFGn_TIHsOV&export=download" target="_blank" class="btn btn-glow" style="padding: 8px 18px; font-size: 0.85rem;">
+              📥 Tải về
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: ĐỀ THI HSA -->
+    <section class="tab-view" id="tab-hsa" style="display: none;">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 style="font-size: 1.55rem; font-weight: 800;">📖 Đề Thi Đánh Giá Năng Lực (HSA)</h2>
+            <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 4px;">Kho đề thi Đánh giá năng lực Đại học Quốc gia Hà Nội</p>
+          </div>
+          <button class="btn btn-glass" onclick="switchTab('home')" style="padding: 8px 16px; font-size: 0.85rem;">
+            ← Về Trang Chủ
+          </button>
+        </div>
+
+        <div class="empty-state">
+          <div style="font-size: 3rem; margin-bottom: 16px;">☁️</div>
+          <h3 style="color: #cbd5e1; margin-bottom: 8px;">Chưa có tài liệu trong mục này</h3>
+          <p style="font-size: 0.9rem;">Hệ thống đang tổng hợp và sẽ sớm cập nhật các bộ đề thi thử HSA 2026.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // 1. Chuyển đổi Slide Tabs an toàn
+    function switchTab(tabId) {
+      const tabs = ['home', 'tsa', 'hsa'];
+      tabs.forEach(function(id) {
+        const el = document.getElementById('tab-' + id);
+        const btn = document.getElementById('btn-' + id);
+        if (el) el.style.display = (id === tabId) ? 'block' : 'none';
+        if (btn) {
+          if (id === tabId) btn.classList.add('active');
+          else btn.classList.remove('active');
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 2. Hệ thống hạt Blink-Blink & Né chuột (Physics Repel)
+    const canvas = document.getElementById('canvas-space');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const mouse = { x: null, y: null, radius: 140 };
+
+    window.addEventListener('mousemove', function(e) {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    window.addEventListener('mouseleave', function() {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    function initCanvasSize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      buildParticles();
+    }
+    window.addEventListener('resize', initCanvasSize);
+
+    function buildParticles() {
+      particles = [];
+      const colors = ['56, 189, 248', '129, 140, 248', '244, 63, 94', '250, 204, 21', '255, 255, 255'];
+      const total = Math.min(90, Math.floor((canvas.width * canvas.height) / 14000));
+      for (let i = 0; i < total; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          size: Math.random() * 2.2 + 1,
+          alpha: Math.random(),
+          alphaSpeed: (Math.random() * 0.02 + 0.008) * (Math.random() > 0.5 ? 1 : -1),
+          color: colors[Math.floor(Math.random() * colors.length)]
+        });
+      }
+    }
+
+    function renderLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < particles.length; i++) {
+        let p = particles[i];
+
+        // Trôi tự do
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0) p.x = canvas.width;
+        else if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        else if (p.y > canvas.height) p.y = 0;
+
+        // Hiệu ứng Blink-Blink lấp lánh
+        p.alpha += p.alphaSpeed;
+        if (p.alpha >= 1) {
+          p.alpha = 1;
+          p.alphaSpeed = -p.alphaSpeed;
+        } else if (p.alpha <= 0.2) {
+          p.alpha = 0.2;
+          p.alphaSpeed = -p.alphaSpeed;
+        }
+
+        // TƯƠNG TÁC NÉ CHUỘT
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = p.x - mouse.x;
+          const dy = p.y - mouse.y;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist < mouse.radius && dist > 0) {
+            const force = (mouse.radius - dist) / mouse.radius;
+            p.x += (dx / dist) * force * 6;
+            p.y += (dy / dist) * force * 6;
+          }
+        }
+
+        // Vẽ ngôi sao
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(' + p.color + ',' + p.alpha + ')';
+        ctx.fill();
+
+        // Nối chùm sao gần nhau
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+          if (dist < 100) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = 'rgba(56, 189, 248,' + (0.15 * (1 - dist / 100)) + ')';
+            ctx.lineWidth = 0.7;
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(renderLoop);
+    }
+
+    initCanvasSize();
+    renderLoop();
+  </script>
+</body>
+</html>
