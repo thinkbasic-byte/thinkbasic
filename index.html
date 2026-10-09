@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>thinkbasic</title>
+  <title>thinkbasic tdzz.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -169,4 +169,232 @@
 
     .btn-glow {
       background: linear-gradient(135deg, #38bdf8, #6366f1);
-      color: #07091
+      color: #070913;
+      box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.4);
+    }
+
+    .btn-glow:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(99, 102, 241, 0.5);
+      color: #fff;
+    }
+
+    .btn-glass {
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      border: 1px solid var(--border);
+    }
+
+    .btn-glass:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px 24px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.35rem;
+      margin-bottom: 20px;
+    }
+
+    .ic-cyan { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+    .ic-rose { background: rgba(244, 63, 94, 0.15); color: #f43f5e; }
+
+    .panel-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 36px;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+
+    .file-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 16px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="navbar">
+    <div class="brand" onclick="switchSlide('home')">
+      <div class="brand-icon">TB</div>
+      <div>
+        <div style="font-weight: 800; font-size: 1.15rem; letter-spacing: 0.5px;">THINKBASIC</div>
+        <div style="font-size: 0.65rem; color: #64748b; font-weight: 700; letter-spacing: 1px;">KHO ĐỀ THI 2026</div>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <button class="nav-btn active" id="btn-home" onclick="switchSlide('home')">
+        <i class="fa-solid fa-house"></i> Trang chủ
+      </button>
+      <button class="nav-btn" id="btn-tsa" onclick="switchSlide('tsa')">
+        <i class="fa-solid fa-graduation-cap"></i> Đề thi TSA
+      </button>
+      <button class="nav-btn" id="btn-hsa" onclick="switchSlide('hsa')">
+        <i class="fa-solid fa-book-open"></i> Đề thi HSA
+      </button>
+    </nav>
+  </header>
+
+  <!-- Slide 1: Trang chủ -->
+  <section class="page-slide" id="slide-home" style="display: block;">
+    <div class="hero">
+      <div class="pill-tag">
+        <i class="fa-solid fa-bolt" style="color: var(--primary);"></i> Cập nhật ngân hàng đề thi chuẩn mới nhất
+      </div>
+      <h1 class="hero-title">
+        KHO ĐỀ THI THỬ <br>
+        <span class="gradient-word">TSA & HSA 2026</span>
+      </h1>
+      <p class="hero-desc">
+        Tổng hợp toàn bộ đề thi chính thức, đề thi thử có lời giải chi tiết cho kỳ thi Đánh giá tư duy (TSA) và Đánh giá năng lực (HSA).
+      </p>
+
+      <div style="display: flex; justify-content: center; gap: 16px;">
+        <button class="btn btn-glow" onclick="switchSlide('tsa')">
+          <i class="fa-solid fa-graduation-cap"></i> Xem Đề Thi TSA
+        </button>
+        <button class="btn btn-glass" onclick="switchSlide('hsa')">
+          <i class="fa-solid fa-book-open"></i> Xem Đề Thi HSA
+        </button>
+      </div>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card" onclick="switchSlide('tsa')">
+        <div class="card-icon ic-cyan"><i class="fa-solid fa-graduation-cap"></i></div>
+        <h3 style="margin-bottom: 8px;">Kỳ Thi TSA (ĐHBK Hà Nội)</h3>
+        <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">Đề thi Đánh giá tư duy: Toán, Đọc hiểu, Khoa học. Đã cập nhật đề chính thức đợt 1 2026.</p>
+      </div>
+
+      <div class="card" onclick="switchSlide('hsa')">
+        <div class="card-icon ic-rose"><i class="fa-solid fa-book-open"></i></div>
+        <h3 style="margin-bottom: 8px;">Kỳ Thi HSA (ĐHQG Hà Nội)</h3>
+        <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">Đề thi Đánh giá năng lực: Định lượng, Định tính và Khoa học. Hệ thống đang tổng hợp.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 2: Đề thi TSA -->
+  <section class="page-slide" id="slide-tsa" style="display: none;">
+    <div class="panel-box">
+      <div class="panel-header">
+        <div>
+          <h2 style="font-size: 1.5rem; font-weight: 800;"><i class="fa-solid fa-graduation-cap" style="color: var(--primary); margin-right: 10px;"></i> Đề Thi Đánh Giá Tư Duy (TSA)</h2>
+          <p style="color: #94a3b8; font-size: 0.88rem; margin-top: 4px;">Tổng hợp đề thi chính thức và đề thi thử TSA Đại học Bách Khoa Hà Nội</p>
+        </div>
+        <button class="btn btn-glass" onclick="switchSlide('home')" style="padding: 8px 16px; font-size: 0.85rem;">
+          <i class="fa-solid fa-arrow-left"></i> Về Trang Chủ
+        </button>
+      </div>
+
+      <!-- Khối hiển thị đề thi AECK -->
+      <div class="file-item">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <i class="fa-solid fa-file-pdf" style="font-size: 2.2rem; color: #f43f5e;"></i>
+          <div>
+            <div style="font-weight: 800; font-size: 1.05rem; color: #fff;">Đề chính thức đợt 1 2026 (AECK)</div>
+            <div style="font-size: 0.8rem; color: #94a3b8; margin-top: 4px;">
+              Đánh giá tư duy TSA 2026 • 3 phần thi (Toán, Đọc hiểu, Khoa học) • Kíp 1 - 2 - 3 • 57 trang
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <a href="https://drive.google.com/file/d/17L1vDVaYc9jIzuHwhCiDDjFGn_TIHsOV/view?usp=sharing" target="_blank" class="btn btn-glass" style="padding: 8px 16px; font-size: 0.85rem;">
+            <i class="fa-solid fa-eye"></i> Xem đề
+          </a>
+          <a href="https://drive.google.com/u/0/uc?id=17L1vDVaYc9jIzuHwhCiDDjFGn_TIHsOV&export=download" target="_blank" class="btn btn-glow" style="padding: 8px 18px; font-size: 0.85rem;">
+            <i class="fa-solid fa-download"></i> Tải về
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 3: Đề thi HSA -->
+  <section class="page-slide" id="slide-hsa" style="display: none;">
+    <div class="panel-box">
+      <div class="panel-header">
+        <div>
+          <h2 style="font-size: 1.5rem; font-weight: 800;"><i class="fa-solid fa-book-open" style="color: var(--accent); margin-right: 10px;"></i> Đề Thi Đánh Giá Năng Lực (HSA)</h2>
+          <p style="color: #94a3b8; font-size: 0.88rem; margin-top: 4px;">Kho đề thi Đánh giá năng lực Đại học Quốc gia Hà Nội</p>
+        </div>
+        <button class="btn btn-glass" onclick="switchSlide('home')" style="padding: 8px 16px; font-size: 0.85rem;">
+          <i class="fa-solid fa-arrow-left"></i> Về Trang Chủ
+        </button>
+      </div>
+
+      <div class="empty-state">
+        <i class="fa-solid fa-cloud-arrow-up" style="font-size: 3rem; margin-bottom: 16px; color: #475569;"></i>
+        <h3 style="color: #cbd5e1; margin-bottom: 8px;">Chưa có tài liệu trong mục này</h3>
+        <p style="font-size: 0.9rem;">Hệ thống đang tổng hợp và sẽ sớm cập nhật các bộ đề thi thử HSA 2026.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Script chuyển Slide an toàn -->
+  <script>
+    function switchSlide(slideId) {
+      const slides = ['home', 'tsa', 'hsa'];
+      slides.forEach(id => {
+        const el = document.getElementById('slide-' + id);
+        const btn = document.getElementById('btn-' + id);
+        if (el) el.style.display = (id === slideId) ? 'block' : 'none';
+        if (btn) {
+          if (id === slideId) btn.classList.add('active');
+          else btn.classList.remove('active');
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
