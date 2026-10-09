@@ -15,7 +15,7 @@
       --secondary: #818cf8;
       --accent: #f43f5e;
       --bg: #070913;
-      --card-bg: rgba(15, 20, 36, 0.65);
+      --card-bg: rgba(15, 20, 36, 0.7);
       --border: rgba(255, 255, 255, 0.08);
     }
 
@@ -34,7 +34,7 @@
       position: relative;
     }
 
-    /* Canvas nền mạng nhện & sao bay lượn */
+    /* Canvas nền sao chuyển động */
     #bg-canvas {
       position: fixed;
       top: 0;
@@ -45,7 +45,6 @@
       pointer-events: none;
     }
 
-    /* Đèn nền phát sáng ảo diệu */
     .glow-sphere {
       position: fixed;
       width: 500px;
@@ -54,16 +53,10 @@
       filter: blur(120px);
       z-index: 0;
       pointer-events: none;
-      opacity: 0.25;
-      animation: floatOrb 8s infinite alternate ease-in-out;
+      opacity: 0.22;
     }
     .orb-1 { top: -100px; left: 15%; background: #38bdf8; }
-    .orb-2 { top: 300px; right: 10%; background: #f43f5e; animation-delay: -4s; }
-
-    @keyframes floatOrb {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(40px, 60px) scale(1.15); }
-    }
+    .orb-2 { top: 350px; right: 10%; background: #f43f5e; }
 
     .app-wrap {
       position: relative;
@@ -76,19 +69,19 @@
       justify-content: space-between;
       align-items: center;
       padding: 18px 50px;
-      background: rgba(7, 9, 19, 0.75);
+      background: rgba(7, 9, 19, 0.85);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
+      z-index: 100;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      text-decoration: none;
-      color: white;
+      cursor: pointer;
     }
 
     .brand-icon {
@@ -107,51 +100,64 @@
 
     .nav-links {
       display: flex;
-      gap: 32px;
+      gap: 24px;
       list-style: none;
     }
 
-    .nav-links a {
+    .nav-btn {
+      background: none;
+      border: none;
       color: #94a3b8;
-      text-decoration: none;
       font-size: 0.95rem;
       font-weight: 600;
-      transition: all 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--primary);
-      text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
-    }
-
-    .badge-status {
+      padding: 8px 16px;
+      border-radius: 10px;
+      cursor: pointer;
       display: flex;
       align-items: center;
       gap: 8px;
-      background: rgba(56, 189, 248, 0.08);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      padding: 6px 14px;
-      border-radius: 99px;
-      font-size: 0.82rem;
-      font-weight: 700;
+      transition: all 0.25s;
+    }
+
+    .nav-btn:hover {
       color: var(--primary);
+      background: rgba(56, 189, 248, 0.08);
     }
 
-    .dot-pulse {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--primary);
-      box-shadow: 0 0 10px var(--primary);
-      animation: pulse 1.5s infinite;
+    .nav-btn.active {
+      color: #fff;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
     }
 
-    @keyframes pulse { 50% { opacity: 0.3; transform: scale(0.8); } }
+    /* Quản lý các trang Slide */
+    .page-slide {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      max-width: 1050px;
+      margin: 40px auto 80px;
+      padding: 0 24px;
+    }
 
-    /* Hero */
+    .page-slide.active-page {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      animation: slideIn 0.4s ease forwards;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Hero ở Trang Chủ */
     .hero {
       text-align: center;
-      padding: 70px 20px 40px;
+      padding: 40px 20px 30px;
       max-width: 900px;
       margin: 0 auto;
     }
@@ -167,11 +173,10 @@
       font-size: 0.85rem;
       color: #cbd5e1;
       margin-bottom: 24px;
-      backdrop-filter: blur(8px);
     }
 
     .hero-title {
-      font-size: 3.8rem;
+      font-size: 3.6rem;
       font-weight: 900;
       line-height: 1.15;
       letter-spacing: -1px;
@@ -182,7 +187,7 @@
       background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #f43f5e 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 0 35px rgba(56, 189, 248, 0.3));
+      filter: drop-shadow(0 0 30px rgba(56, 189, 248, 0.3));
     }
 
     .hero-desc {
@@ -193,15 +198,8 @@
       line-height: 1.6;
     }
 
-    .cta-group {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
     .btn {
-      padding: 14px 30px;
+      padding: 14px 28px;
       border-radius: 14px;
       font-weight: 700;
       font-size: 0.95rem;
@@ -209,19 +207,18 @@
       align-items: center;
       gap: 10px;
       cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: none;
+      transition: all 0.25s;
     }
 
     .btn-glow {
       background: linear-gradient(135deg, #38bdf8, #6366f1);
       color: #070913;
-      border: none;
       box-shadow: 0 10px 30px -5px rgba(56, 189, 248, 0.4);
     }
 
     .btn-glow:hover {
-      transform: translateY(-3px) scale(1.02);
+      transform: translateY(-3px);
       box-shadow: 0 15px 40px rgba(99, 102, 241, 0.5);
       color: #fff;
     }
@@ -236,22 +233,14 @@
     .btn-glass:hover {
       background: rgba(255, 255, 255, 0.1);
       transform: translateY(-3px);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Container */
-    .container {
-      max-width: 1050px;
-      margin: 40px auto 80px;
-      padding: 0 24px;
     }
 
     /* Cards Grid */
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 24px;
-      margin-bottom: 40px;
+      margin-top: 40px;
     }
 
     .card {
@@ -259,42 +248,24 @@
       border: 1px solid var(--border);
       backdrop-filter: blur(14px);
       border-radius: 20px;
-      padding: 32px 28px;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--primary), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
+      padding: 30px 24px;
+      transition: all 0.3s;
     }
 
     .card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-6px);
       border-color: rgba(255, 255, 255, 0.2);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     }
 
-    .card:hover::before {
-      opacity: 1;
-    }
-
     .card-icon {
-      width: 52px;
-      height: 52px;
+      width: 50px;
+      height: 50px;
       border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       margin-bottom: 20px;
     }
 
@@ -302,185 +273,234 @@
     .ic-purple { background: rgba(129, 140, 248, 0.12); color: #818cf8; }
     .ic-rose { background: rgba(244, 63, 94, 0.12); color: #f43f5e; }
 
-    .card h3 {
-      font-size: 1.3rem;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      color: #94a3b8;
-      font-size: 0.92rem;
-      line-height: 1.6;
-    }
-
-    /* Kho Tài Liệu File */
-    .file-box {
+    /* Slide Kho Tài Liệu */
+    .panel-box {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      backdrop-filter: blur(14px);
-      border-radius: 20px;
-      padding: 32px;
+      backdrop-filter: blur(16px);
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
     }
 
-    .file-row {
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+
+    .file-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 16px 20px;
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border);
       border-radius: 14px;
-      margin-top: 14px;
+      margin-bottom: 14px;
       transition: all 0.25s;
     }
 
-    .file-row:hover {
+    .file-item:hover {
       background: rgba(255, 255, 255, 0.06);
       transform: translateX(4px);
-      border-color: rgba(255, 255, 255, 0.18);
+      border-color: rgba(56, 189, 248, 0.3);
     }
   </style>
 </head>
 <body>
 
-  <!-- Hiệu ứng hạt sao & mạng nhện chuyển động -->
   <canvas id="bg-canvas"></canvas>
-
   <div class="glow-sphere orb-1"></div>
   <div class="glow-sphere orb-2"></div>
 
   <div class="app-wrap">
     <!-- Navbar -->
     <header class="navbar">
-      <a href="#" class="brand">
+      <div class="brand" onclick="switchSlide('home')">
         <div class="brand-icon">TB</div>
         <div>
           <div style="font-weight: 800; font-size: 1.15rem; letter-spacing: 0.5px;">THINKBASIC</div>
-          <div style="font-size: 0.65rem; color: #64748b; font-weight: 700; letter-spacing: 1px;">TSA ACADEMY</div>
+          <div style="font-size: 0.65rem; color: #64748b; font-weight: 700; letter-spacing: 1px;">TSA PORTAL</div>
         </div>
-      </a>
+      </div>
 
-      <ul class="nav-links">
-        <li><a href="#">Trang chủ</a></li>
-        <li><a href="#features">Tính năng</a></li>
-        <li><a href="#files">Kho Tài Liệu</a></li>
-        <li><a href="#">Lộ trình 2026</a></li>
-      </ul>
+      <!-- Các nút chuyển Slide / Tab -->
+      <nav class="nav-links">
+        <button class="nav-btn active" id="btn-home" onclick="switchSlide('home')">
+          <i class="fa-solid fa-house"></i> Trang chủ
+        </button>
+        <button class="nav-btn" id="btn-files" onclick="switchSlide('files')">
+          <i class="fa-solid fa-folder-open"></i> Kho Tài Liệu
+        </button>
+        <button class="nav-btn" id="btn-roadmap" onclick="switchSlide('roadmap')">
+          <i class="fa-solid fa-compass"></i> Lộ Trình TSA
+        </button>
+      </nav>
 
-      <div class="badge-status">
-        <div class="dot-pulse"></div>
-        <span>ONLINE 2026</span>
+      <div style="font-size: 0.85rem; color: var(--primary); font-weight: 700; background: rgba(56, 189, 248, 0.1); padding: 6px 14px; border-radius: 99px; border: 1px solid rgba(56, 189, 248, 0.25);">
+        <i class="fa-solid fa-circle" style="font-size: 0.5rem; margin-right: 6px;"></i> ONLINE
       </div>
     </header>
 
-    <!-- Hero -->
-    <section class="hero">
-      <div class="pill-tag">
-        <i class="fa-solid fa-atom" style="color: var(--primary);"></i> Nền tảng luyện tư duy đột phá
-      </div>
-      <h1 class="hero-title">
-        TỐI ƯU TƯ DUY <br>
-        <span class="gradient-word" id="type-text">CHINH PHỤC TSA</span>
-      </h1>
-      <p class="hero-desc">
-        Hệ thống tổng hợp đề thi thử chuẩn cấu trúc, phương pháp tư duy suy luận nhanh và các kỹ thuật bấm máy Casio đỉnh cao.
-      </p>
+    <!-- ================= SLIDE 1: TRANG CHỦ ================= -->
+    <section class="page-slide active-page" id="slide-home">
+      <div class="hero">
+        <div class="pill-tag">
+          <i class="fa-solid fa-atom" style="color: var(--primary);"></i> Nền tảng luyện tư duy đột phá
+        </div>
+        <h1 class="hero-title">
+          TỐI ƯU TƯ DUY <br>
+          <span class="gradient-word">CHINH PHỤC TSA</span>
+        </h1>
+        <p class="hero-desc">
+          Tổng hợp đề thi thử chuẩn cấu trúc, phương pháp tư duy suy luận nhanh và các kỹ thuật bấm máy Casio đỉnh cao.
+        </p>
 
-      <div class="cta-group">
-        <a href="#files" class="btn btn-glow"><i class="fa-solid fa-cloud-arrow-down"></i> Tải Tài Liệu Mới Nhất</a>
-        <a href="#features" class="btn btn-glass"><i class="fa-solid fa-compass"></i> Khám Phá Lộ Trình</a>
+        <div style="display: flex; justify-content: center; gap: 16px;">
+          <!-- Bấm nút này sẽ trượt sang slide Kho Tài Liệu -->
+          <button class="btn btn-glow" onclick="switchSlide('files')">
+            <i class="fa-solid fa-folder-open"></i> Vào Kho Tài Liệu
+          </button>
+          <button class="btn btn-glass" onclick="switchSlide('roadmap')">
+            <i class="fa-solid fa-compass"></i> Xem Lộ Trình
+          </button>
+        </div>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon ic-cyan"><i class="fa-solid fa-bolt"></i></div>
+          <h3 style="margin-bottom: 8px;">Tốc Độ & Phản Xạ</h3>
+          <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">Kỹ năng bắt nhịp đề thi, nhận diện các dạng bài suy luận logic ngay từ những giây đầu tiên.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon ic-purple"><i class="fa-solid fa-brain"></i></div>
+          <h3 style="margin-bottom: 8px;">Tư Duy Bản Chất</h3>
+          <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">Hiểu sâu lý thuyết Toán và Khoa học ứng dụng, tránh lối học vẹt rập khuôn máy móc.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon ic-rose"><i class="fa-solid fa-calculator"></i></div>
+          <h3 style="margin-bottom: 8px;">Casio VDC Nhanh</h3>
+          <p style="color: #94a3b8; font-size: 0.9rem; line-height: 1.6;">Ứng dụng máy tính cầm tay để kiểm tra nghiệm số và tối ưu thời gian giải quyết câu hỏi.</p>
+        </div>
       </div>
     </section>
 
-    <!-- Features -->
-    <main class="container">
-      <div class="cards-grid" id="features">
-        <div class="card">
-          <div class="card-icon ic-cyan"><i class="fa-solid fa-bolt"></i></div>
-          <h3>Tốc Độ & Phản Xạ</h3>
-          <p>Kỹ năng bắt nhịp đề thi, nhận diện các dạng toán và suy luận logic chỉ trong vòng vài giây đầu đọc đề.</p>
+    <!-- ================= SLIDE 2: KHO TÀI LIỆU ================= -->
+    <section class="page-slide" id="slide-files">
+      <div class="panel-box">
+        <div class="panel-header">
+          <div>
+            <h2 style="font-size: 1.6rem; font-weight: 800;"><i class="fa-solid fa-folder-open" style="color: var(--primary); margin-right: 10px;"></i> Kho Tài Liệu & Đề Thi TSA</h2>
+            <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 4px;">Tất cả tài liệu được tuyển chọn kỹ lưỡng, cập nhật định dạng đề mới nhất.</p>
+          </div>
+          <button class="btn btn-glass" onclick="switchSlide('home')" style="padding: 8px 16px; font-size: 0.85rem;">
+            <i class="fa-solid fa-arrow-left"></i> Về Trang Chủ
+          </button>
         </div>
 
-        <div class="card-item card">
-          <div class="card-icon ic-purple"><i class="fa-solid fa-brain"></i></div>
-          <h3>Tư Duy Bản Chất</h3>
-          <p>Hiểu sâu lý thuyết Toán - Khoa học thực chiến, không phụ thuộc vào công thức máy móc.</p>
+        <!-- Danh sách file -->
+        <div class="file-item">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <i class="fa-solid fa-file-pdf" style="font-size: 2rem; color: #f43f5e;"></i>
+            <div>
+              <div style="font-weight: 700; font-size: 1rem;">Bo-De-Thi-Thu-TSA-Chuan-Cau-Truc.pdf</div>
+              <div style="font-size: 0.75rem; color: #64748b;">3.5 MB • Đầy đủ đáp án & giải thích chi tiết</div>
+            </div>
+          </div>
+          <a href="#" class="btn btn-glass" style="padding: 8px 18px; font-size: 0.85rem;"><i class="fa-solid fa-download"></i> Tải Ngay</a>
         </div>
 
-        <div class="card-item card">
-          <div class="card-icon ic-rose"><i class="fa-solid fa-calculator"></i></div>
-          <h3>Thủ Thuật Casio VDC</h3>
-          <p>Tận dụng tối đa sức mạnh máy tính cầm tay để kiểm tra đáp án, thử nghiệm nghiệm số và tối ưu thời gian.</p>
+        <div class="file-item">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <i class="fa-solid fa-file-excel" style="font-size: 2rem; color: #38bdf8;"></i>
+            <div>
+              <div style="font-weight: 700; font-size: 1rem;">Bang-Tra-Cuu-Casio-580-VDC.xlsx</div>
+              <div style="font-size: 0.75rem; color: #64748b;">1.8 MB • Bảng tổng hợp thuật toán bấm máy</div>
+            </div>
+          </div>
+          <a href="#" class="btn btn-glass" style="padding: 8px 18px; font-size: 0.85rem;"><i class="fa-solid fa-download"></i> Tải Ngay</a>
+        </div>
+
+        <div class="file-item">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <i class="fa-solid fa-file-powerpoint" style="font-size: 2rem; color: #f59e0b;"></i>
+            <div>
+              <div style="font-weight: 700; font-size: 1rem;">So-Do-Tu-Duy-Khoa-Hoc-TSA.pptx</div>
+              <div style="font-size: 0.75rem; color: #64748b;">4.2 MB • Mindmap kiến thức Vật lý, Hóa học, Sinh học</div>
+            </div>
+          </div>
+          <a href="#" class="btn btn-glass" style="padding: 8px 18px; font-size: 0.85rem;"><i class="fa-solid fa-download"></i> Tải Ngay</a>
         </div>
       </div>
+    </section>
 
-      <!-- Kho file tài liệu -->
-      <section class="file-box" id="files">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-          <h2 style="font-size: 1.35rem; font-weight: 800;"><i class="fa-solid fa-folder-open" style="color: var(--primary); margin-right: 8px;"></i> Kho Tài Liệu & Đề Thi Mới Nhất</h2>
-          <span style="font-size: 0.8rem; color: #64748b;">Cập nhật 2026</span>
-        </div>
-        <p style="color: #94a3b8; font-size: 0.88rem; margin-bottom: 20px;">Tất cả tài liệu được tổng hợp và chọn lọc kỹ lưỡng.</p>
-
-        <div class="file-row">
-          <div style="display: flex; align-items: center; gap: 14px;">
-            <i class="fa-solid fa-file-pdf" style="font-size: 1.8rem; color: #f43f5e;"></i>
-            <div>
-              <div style="font-weight: 700; font-size: 0.95rem;">Bo-De-Thi-Thu-TSA-Moi-Nhat.pdf</div>
-              <div style="font-size: 0.75rem; color: #64748b;">3.2 MB • Đề chuẩn cấu trúc có lời giải</div>
-            </div>
+    <!-- ================= SLIDE 3: LỘ TRÌNH ================= -->
+    <section class="page-slide" id="slide-roadmap">
+      <div class="panel-box">
+        <div class="panel-header">
+          <div>
+            <h2 style="font-size: 1.6rem; font-weight: 800;"><i class="fa-solid fa-compass" style="color: var(--secondary); margin-right: 10px;"></i> Lộ Trình Ôn Luyện Toàn Diện</h2>
+            <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 4px;">Chiến lược phân chia thời gian đạt điểm cao kỳ thi TSA.</p>
           </div>
-          <a href="#" class="btn btn-glass" style="padding: 8px 16px; font-size: 0.85rem;"><i class="fa-solid fa-download"></i> Tải Ngay</a>
+          <button class="btn btn-glass" onclick="switchSlide('home')" style="padding: 8px 16px; font-size: 0.85rem;">
+            <i class="fa-solid fa-arrow-left"></i> Về Trang Chủ
+          </button>
         </div>
 
-        <div class="file-row">
-          <div style="display: flex; align-items: center; gap: 14px;">
-            <i class="fa-solid fa-file-excel" style="font-size: 1.8rem; color: #38bdf8;"></i>
-            <div>
-              <div style="font-weight: 700; font-size: 0.95rem;">Tong-Hop-Cong-Thuc-Casio-580.xlsx</div>
-              <div style="font-size: 0.75rem; color: #64748b;">1.5 MB • File Excel bảng tra phím tắt</div>
-            </div>
+        <div style="display: grid; gap: 16px;">
+          <div style="background: rgba(255,255,255,0.03); padding: 20px; border-radius: 14px; border: 1px solid var(--border);">
+            <h4 style="color: var(--primary); margin-bottom: 6px;">Giai Đoạn 1: Xây Dựng Nền Tảng Logic & Bản Chất</h4>
+            <p style="color: #94a3b8; font-size: 0.9rem;">Ôn chắc các định luật khoa học căn bản, bản chất hàm số và kỹ năng phân tích bảng số liệu.</p>
           </div>
-          <a href="#" class="btn btn-glass" style="padding: 8px 16px; font-size: 0.85rem;"><i class="fa-solid fa-download"></i> Tải Ngay</a>
+          <div style="background: rgba(255,255,255,0.03); padding: 20px; border-radius: 14px; border: 1px solid var(--border);">
+            <h4 style="color: var(--secondary); margin-bottom: 6px;">Giai Đoạn 2: Tối Ưu Tốc Độ & Kỹ Thuật Casio</h4>
+            <p style="color: #94a3b8; font-size: 0.9rem;">Thực hành các dạng toán bấm máy Casio fx-580VN X giải nhanh các bài toán cực trị, số phức, hình học không gian.</p>
+          </div>
+          <div style="background: rgba(255,255,255,0.03); padding: 20px; border-radius: 14px; border: 1px solid var(--border);">
+            <h4 style="color: var(--accent); margin-bottom: 6px;">Giai Đoạn 3: Luyện Đề Bấm Giờ Áp Lực Thi Thật</h4>
+            <p style="color: #94a3b8; font-size: 0.9rem;">Rèn luyện tư duy làm bài dưới áp lực đồng hồ 15s - 60s cho mỗi câu hỏi trắc nghiệm.</p>
+          </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
   </div>
 
-  <!-- Hiệu ứng Animation Canvas + Typing JS -->
+  <!-- SCRIPT CHUYỂN SLIDE & NỀN SAO CHUYỂN ĐỘNG -->
   <script>
-    // 1. Chữ chạy gõ tự động đổi nội dung
-    const phrases = ["CHINH PHỤC TSA", "BỨT PHÁ ĐIỂM SỐ", "TỐI ƯU TỪNG GIÂY"];
-    let pIdx = 0, charIdx = 0, isDeleting = false;
-    const typeElem = document.getElementById("type-text");
+    // Hàm chuyển slide mượt mà
+    function switchSlide(slideId) {
+      // Ẩn tất cả slide
+      document.querySelectorAll('.page-slide').forEach(slide => {
+        slide.classList.remove('active-page');
+      });
 
-    function typeLoop() {
-      const current = phrases[pIdx];
-      if (isDeleting) {
-        typeElem.innerText = current.substring(0, charIdx--);
-      } else {
-        typeElem.innerText = current.substring(0, charIdx++);
-      }
+      // Bỏ active tất cả nút trên menu
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
 
-      let speed = isDeleting ? 40 : 90;
-      if (!isDeleting && charIdx > current.length) {
-        speed = 1800; // Nghỉ khi gõ xong
-        isDeleting = true;
-      } else if (isDeleting && charIdx < 0) {
-        isDeleting = false;
-        pIdx = (pIdx + 1) % phrases.length;
-        speed = 400;
-      }
-      setTimeout(typeLoop, speed);
+      // Bật slide và nút được chọn
+      const targetSlide = document.getElementById('slide-' + slideId);
+      const targetBtn = document.getElementById('btn-' + slideId);
+
+      if (targetSlide) targetSlide.classList.add('active-page');
+      if (targetBtn) targetBtn.classList.add('active');
+
+      // Cuộn lên đầu mượt mà
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    typeLoop();
 
-    // 2. Nền Canvas hạt mạng nhện tương tác chuột
+    // Hiệu ứng Canvas nền hạt nối mạng nhện
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
     let pts = [];
-    let mouse = { x: null, y: null };
 
     function initCanvas() {
       canvas.width = window.innerWidth;
@@ -491,20 +511,17 @@
         pts.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.7,
-          vy: (Math.random() - 0.5) * 0.7,
-          r: Math.random() * 1.6 + 0.6
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: (Math.random() - 0.5) * 0.6,
+          r: Math.random() * 1.5 + 0.6
         });
       }
     }
     window.addEventListener('resize', initCanvas);
-    window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
-    window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
     initCanvas();
 
     function renderCanvas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
       for (let i = 0; i < pts.length; i++) {
         let p = pts[i];
         p.x += p.vx;
@@ -514,10 +531,9 @@
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
         ctx.fill();
 
-        // Nối các hạt gần nhau
         for (let j = i + 1; j < pts.length; j++) {
           let p2 = pts[j];
           let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
@@ -525,19 +541,7 @@
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(56, 189, 248, ${0.18 * (1 - dist / 110)})`;
-            ctx.stroke();
-          }
-        }
-
-        // Tương tác khi di chuột qua hạt
-        if (mouse.x !== null) {
-          let mDist = Math.hypot(p.x - mouse.x, p.y - mouse.y);
-          if (mDist < 130) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(mouse.x, mouse.y);
-            ctx.strokeStyle = `rgba(129, 140, 248, ${0.3 * (1 - mDist / 130)})`;
+            ctx.strokeStyle = `rgba(56, 189, 248, ${0.16 * (1 - dist / 110)})`;
             ctx.stroke();
           }
         }
