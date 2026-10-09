@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ThinkBasic - Luyện Đề TSA & HSA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
@@ -47,7 +47,7 @@
       background: transparent;
     }
 
-    /* Vùng hào quang nền chuyển sắc */
+    /* Đèn nền phát quang */
     .glow-light {
       position: fixed;
       width: 600px;
@@ -183,9 +183,10 @@
     .hero-h1 {
       font-size: 3.5rem;
       font-weight: 900;
-      line-height: 1.15;
+      line-height: 1.25;
       letter-spacing: -1px;
       margin-bottom: 16px;
+      min-height: 140px;
     }
 
     .gradient-txt {
@@ -193,6 +194,19 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       filter: drop-shadow(0 0 35px rgba(56, 189, 248, 0.4));
+    }
+
+    .type-cursor {
+      display: inline-block;
+      margin-left: 2px;
+      color: var(--primary);
+      animation: blinkCursor 0.8s infinite;
+      font-weight: 400;
+    }
+
+    @keyframes blinkCursor {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
     .hero-desc {
@@ -284,7 +298,7 @@
     .ic-cyan { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
     .ic-rose { background: rgba(244, 63, 94, 0.15); color: #f43f5e; }
 
-    /* Panel đề thi */
+    /* Panel */
     .panel {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -356,10 +370,6 @@
           📖 Đề thi HSA
         </button>
       </nav>
-
-      <div style="font-size: 0.85rem; color: var(--primary); font-weight: 700; background: rgba(56, 189, 248, 0.1); padding: 6px 14px; border-radius: 99px; border: 1px solid rgba(56, 189, 248, 0.25);">
-        ● ONLINE 2026
-      </div>
     </header>
 
     <!-- TAB 1: TRANG CHỦ -->
@@ -370,7 +380,7 @@
         </div>
         <h1 class="hero-h1">
           KHO ĐỀ THI THỬ <br>
-          <span class="gradient-txt">TSA & HSA 2026</span>
+          <span class="gradient-txt" id="typewriter-text"></span><span class="type-cursor">|</span>
         </h1>
         <p class="hero-desc">
           Tổng hợp toàn bộ đề thi chính thức, đề thi thử có lời giải chi tiết cho kỳ thi Đánh giá tư duy (TSA) và Đánh giá năng lực (HSA).
@@ -391,7 +401,7 @@
           <div class="card-icon ic-cyan">🎓</div>
           <h3 style="margin-bottom: 8px;">Kỳ Thi TSA (ĐHBK Hà Nội)</h3>
           <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
-            Đề thi Đánh giá tư duy gồm Toán, Đọc hiểu và Khoa học. Đã cập nhật đề chính thức đợt 1 2026 (AECK).
+            Đề thi Đánh giá tư duy gồm Toán, Đọc hiểu và Khoa học. Đã cập nhật đề chính thức đợt 1 2026 (AECK)[cite: 9, 10].
           </p>
         </div>
 
@@ -424,7 +434,7 @@
             <div>
               <div style="font-weight: 800; font-size: 1.05rem; color: #fff;">Đề chính thức đợt 1 2026 (AECK)</div>
               <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">
-                Đánh giá tư duy TSA 2026 • 3 phần thi (Toán, Đọc hiểu, Khoa học) • Kíp 1 - 2 - 3 • 57 trang
+                Đánh giá tư duy TSA 2026 • 3 phần thi (Toán, Đọc hiểu, Khoa học) • Kíp 1 - 2 - 3 • 57 trang[cite: 9, 10]
               </div>
             </div>
           </div>
@@ -463,6 +473,7 @@
   </div>
 
   <script>
+    // 1. Chuyển đổi tab
     function switchTab(tabId) {
       const tabs = ['home', 'tsa', 'hsa'];
       tabs.forEach(function(id) {
@@ -477,11 +488,42 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // --- HỆ THỐNG HẠT VẬT LÝ QUÁN TÍNH & NHẤP NHÁY SÓNG SIN ---
+    // 2. Hiệu ứng máy đánh chữ (Typewriter Effect)
+    const textTarget = "TSA & HSA 2026";
+    let charIndex = 0;
+    let isDeleting = false;
+    const typeElem = document.getElementById('typewriter-text');
+
+    function playTypewriter() {
+      if (!isDeleting) {
+        charIndex++;
+        typeElem.textContent = textTarget.substring(0, charIndex);
+        if (charIndex === textTarget.length) {
+          setTimeout(function() {
+            isDeleting = true;
+            playTypewriter();
+          }, 2000); // Dừng lại đúng 2 giây khi gõ xong
+          return;
+        }
+        setTimeout(playTypewriter, 110);
+      } else {
+        charIndex--;
+        typeElem.textContent = textTarget.substring(0, charIndex);
+        if (charIndex === 0) {
+          isDeleting = false;
+          setTimeout(playTypewriter, 400); // Nghỉ 0.4 giây rồi lặp lại
+          return;
+        }
+        setTimeout(playTypewriter, 50);
+      }
+    }
+    playTypewriter();
+
+    // 3. Hệ thống hạt tăng gấp đôi (~800 hạt), né chuột và nhấp nháy siêu mượt
     const canvas = document.getElementById('space-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
-    const mouse = { x: null, y: null, radius: 150 };
+    const mouse = { x: null, y: null, radius: 145 };
 
     window.addEventListener('mousemove', function(e) {
       mouse.x = e.clientX;
@@ -496,106 +538,107 @@
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      generateParticles();
+      buildDenseParticles();
     }
     window.addEventListener('resize', resizeCanvas);
 
-    function generateParticles() {
+    function buildDenseParticles() {
       particles = [];
       const palette = [
-        '56, 189, 248',  // Cyan neon
-        '129, 140, 248', // Xanh tím
-        '244, 63, 94',   // Hồng neon
-        '250, 204, 21',  // Vàng tinh tú
-        '255, 255, 255'  // Trắng sáng
+        '56, 189, 248',
+        '129, 140, 248',
+        '244, 63, 94',
+        '250, 204, 21',
+        '255, 255, 255'
       ];
 
-      // Mật độ dày đặc (~200 hạt trên màn hình desktop thông thường)
-      const particleCount = Math.min(220, Math.floor((canvas.width * canvas.height) / 6500));
+      // Gấp đôi số hạt (~800 - 850 hạt)
+      const count = Math.min(850, Math.floor((canvas.width * canvas.height) / 1600));
 
-      for (let i = 0; i < particleCount; i++) {
-        const baseSpeed = Math.random() * 0.45 + 0.15;
+      for (let i = 0; i < count; i++) {
+        const speed = Math.random() * 0.45 + 0.15;
         const angle = Math.random() * Math.PI * 2;
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: Math.cos(angle) * baseSpeed,
-          vy: Math.sin(angle) * baseSpeed,
-          baseVx: Math.cos(angle) * baseSpeed,
-          baseVy: Math.sin(angle) * baseSpeed,
-          size: Math.random() * 2.2 + 0.8,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          baseVx: Math.cos(angle) * speed,
+          baseVy: Math.sin(angle) * speed,
+          size: Math.random() * 1.8 + 0.7,
           color: palette[Math.floor(Math.random() * palette.length)],
-          // Nhấp nháy theo sóng sin mượt mà
           pulseAngle: Math.random() * Math.PI * 2,
-          pulseSpeed: Math.random() * 0.03 + 0.015,
-          baseAlpha: Math.random() * 0.45 + 0.35
+          pulseSpeed: Math.random() * 0.035 + 0.015,
+          baseAlpha: Math.random() * 0.4 + 0.35
         });
       }
     }
 
-    function animate() {
+    function animateParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       for (let i = 0; i < particles.length; i++) {
         let p = particles[i];
 
-        // 1. Tương tác lực né chuột dạng quán tính mượt mà (Inertia Repel)
+        // Vật lý né chuột quán tính
         if (mouse.x !== null && mouse.y !== null) {
           const dx = p.x - mouse.x;
           const dy = p.y - mouse.y;
-          const dist = Math.hypot(dx, dy);
+          const distSq = dx * dx + dy * dy;
+          const radiusSq = mouse.radius * mouse.radius;
 
-          if (dist < mouse.radius && dist > 0) {
-            const force = Math.pow((mouse.radius - dist) / mouse.radius, 1.5);
-            const repelStrength = 1.8;
-            p.vx += (dx / dist) * force * repelStrength;
-            p.vy += (dy / dist) * force * repelStrength;
+          if (distSq < radiusSq && distSq > 0) {
+            const dist = Math.sqrt(distSq);
+            const force = (mouse.radius - dist) / mouse.radius;
+            p.vx += (dx / dist) * force * 1.6;
+            p.vy += (dy / dist) * force * 1.6;
           }
         }
 
-        // Lực giảm chấn (damping) giúp hạt trôi chậm dần lại về vận tốc ban đầu
+        // Ma sát giảm chấn
         p.vx = p.vx * 0.94 + p.baseVx * 0.06;
         p.vy = p.vy * 0.94 + p.baseVy * 0.06;
 
         p.x += p.vx;
         p.y += p.vy;
 
-        // Vòng lặp viền màn hình
         if (p.x < 0) p.x = canvas.width;
         else if (p.x > canvas.width) p.x = 0;
         if (p.y < 0) p.y = canvas.height;
         else if (p.y > canvas.height) p.y = 0;
 
-        // 2. Độ sáng nhấp nháy đa tầng
+        // Độ sáng nhấp nháy sóng Sin
         p.pulseAngle += p.pulseSpeed;
-        const currentAlpha = Math.max(0.12, Math.min(1, p.baseAlpha + Math.sin(p.pulseAngle) * 0.45));
+        const alpha = Math.max(0.12, Math.min(1, p.baseAlpha + Math.sin(p.pulseAngle) * 0.45));
 
-        // 3. Vẽ hạt
+        // Vẽ từng hạt
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(' + p.color + ',' + currentAlpha + ')';
+        ctx.fillStyle = 'rgba(' + p.color + ',' + alpha + ')';
         ctx.fill();
+      }
 
-        // 4. Nối lưới chùm sao mềm mại
-        for (let j = i + 1; j < particles.length; j++) {
-          let p2 = particles[j];
-          let d = Math.hypot(p.x - p2.x, p.y - p2.y);
-          if (d < 85) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = 'rgba(56, 189, 248,' + (0.16 * (1 - d / 85)) + ')';
-            ctx.lineWidth = 0.6;
-            ctx.stroke();
+      // Nối chùm sao gần nhau theo cơ chế Gom cụm tối ưu (Batch stroke)
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.12)';
+      ctx.lineWidth = 0.5;
+      for (let i = 0; i < particles.length; i += 2) {
+        for (let j = i + 1; j < particles.length; j += 2) {
+          const dX = particles[i].x - particles[j].x;
+          const dY = particles[i].y - particles[j].y;
+          if (dX * dX + dY * dY < 2025) { // Khoảng cách < 45px
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
           }
         }
       }
+      ctx.stroke();
 
-      requestAnimationFrame(animate);
+      requestAnimationFrame(animateParticles);
     }
 
     resizeCanvas();
-    animate();
+    animateParticles();
   </script>
 </body>
 </html>
