@@ -95,7 +95,7 @@
     }
 
     .brand:active {
-      transform: scale(0.96);
+      transform: scale(0.97);
     }
 
     .brand-logo {
@@ -152,7 +152,7 @@
     }
 
     .nav-btn:active {
-      transform: scale(0.94);
+      transform: scale(0.96);
     }
 
     .nav-btn.active {
@@ -247,7 +247,7 @@
     }
 
     .btn:active {
-      transform: scale(0.95);
+      transform: scale(0.96);
     }
 
     .btn-glow {
@@ -263,7 +263,7 @@
     }
 
     .btn-glow:active {
-      transform: scale(0.95) translateY(0);
+      transform: scale(0.96) translateY(0);
     }
 
     .btn-glass {
@@ -278,7 +278,7 @@
     }
 
     .btn-glass:active {
-      transform: scale(0.95) translateY(0);
+      transform: scale(0.96) translateY(0);
     }
 
     .cards-grid {
@@ -305,7 +305,7 @@
     }
 
     .card:active {
-      transform: scale(0.97);
+      transform: scale(0.98);
     }
 
     .card-icon {
@@ -384,7 +384,7 @@
     }
 
     .q-jump-btn:active {
-      transform: scale(0.9);
+      transform: scale(0.92);
     }
 
     .q-jump-btn.answered {
@@ -432,7 +432,7 @@
     }
 
     .option-label:active {
-      transform: scale(0.98);
+      transform: scale(0.99);
     }
 
     .option-label.correct {
@@ -506,7 +506,7 @@
     }
 
     .ai-btn:active {
-      transform: scale(0.94);
+      transform: scale(0.96);
     }
 
     .api-key-config {
@@ -637,14 +637,11 @@
           <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--primary); font-size: 0.75rem; text-decoration: none;">[Lấy key miễn phí]</a>
         </div>
 
-        <!-- Bảng điều hướng nhanh 40 câu -->
         <div style="font-size: 0.85rem; font-weight: 700; color: #94a3b8; margin-bottom: 8px;">Bảng câu hỏi:</div>
         <div class="quiz-nav-grid" id="quiz-nav"></div>
 
-        <!-- Danh sách 40 câu hỏi -->
         <div id="quiz-container"></div>
 
-        <!-- Nút thao tác -->
         <div style="display: flex; gap: 14px; margin-top: 24px;">
           <button class="btn btn-glow" style="flex: 1; justify-content: center;" onclick="submitExam()">
             🏁 Nộp Bài & Xem Điểm
@@ -768,7 +765,6 @@
       navGrid.innerHTML = '';
 
       examQuestions.forEach((q) => {
-        // Nút điều hướng
         const jumpBtn = document.createElement('button');
         jumpBtn.className = 'q-jump-btn';
         jumpBtn.id = `nav-btn-${q.id}`;
@@ -778,7 +774,6 @@
         };
         navGrid.appendChild(jumpBtn);
 
-        // Khung câu hỏi
         const box = document.createElement('div');
         box.className = 'quiz-question-box';
         box.id = `qbox-${q.id}`;
@@ -1041,7 +1036,7 @@ Yêu cầu:
     }
     playTypewriter();
 
-    // ================= 800 HẠT VŨ TRỤ, NÉ CHUỘT & HIỆU ỨNG CLICK BÙNG NỔ =================
+    // ================= 800 HẠT VŨ TRỤ, NÉ CHUỘT & HIỆU ỨNG CLICK NHẸ NHÀNG =================
     const canvas = document.getElementById('space-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -1052,45 +1047,45 @@ Yêu cầu:
     window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
     window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
 
-    // HIỆU ỨNG KHI CLICK CHUỘT (SHOCKWAVE + BẮN TIA SÁNG + ĐẨY HẠT VŨ TRỤ)
+    // HIỆU ỨNG CLICK NHẸ NHÀNG, TINH TẾ (MICRO-INTERACTION)
     window.addEventListener('click', function(e) {
-      // 1. Vòng sóng xung kích lan tỏa (Shockwave Ripple)
+      // 1. Vòng sóng lan tỏa nhỏ gọn, thanh thoát (max 35px)
       clickRipples.push({
         x: e.clientX,
         y: e.clientY,
-        r: 6,
-        maxR: 110,
-        alpha: 0.95,
+        r: 3,
+        maxR: 35,
+        alpha: 0.6,
         color: '56, 189, 248'
       });
 
-      // 2. Tia sáng pháo hoa bùng nổ (Particle Spark Burst - 32 hạt)
-      const sparkColors = ['56, 189, 248', '168, 85, 247', '244, 63, 94', '250, 204, 21', '255, 255, 255'];
-      for (let i = 0; i < 32; i++) {
+      // 2. Một vài đốm sáng nhỏ li ti (8 đốm sáng bay nhẹ, tan biến êm)
+      const sparkColors = ['56, 189, 248', '129, 140, 248', '255, 255, 255'];
+      for (let i = 0; i < 8; i++) {
         const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 6.5 + 2.5;
+        const speed = Math.random() * 1.8 + 0.8;
         clickSparks.push({
           x: e.clientX,
           y: e.clientY,
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
-          size: Math.random() * 2.5 + 1.2,
-          alpha: 1,
-          decay: Math.random() * 0.03 + 0.018,
+          size: Math.random() * 1.2 + 0.6,
+          alpha: 0.8,
+          decay: 0.03,
           color: sparkColors[Math.floor(Math.random() * sparkColors.length)]
         });
       }
 
-      // 3. Xung lực hất tung các hạt nền xung quanh tâm click
+      // 3. Tác động nhẹ nhàng lên hạt nền xung quanh
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         const dx = p.x - e.clientX;
         const dy = p.y - e.clientY;
         const distSq = dx * dx + dy * dy;
-        const blastRadius = 180;
+        const blastRadius = 70;
         if (distSq < blastRadius * blastRadius && distSq > 0) {
           const dist = Math.sqrt(distSq);
-          const force = ((blastRadius - dist) / blastRadius) * 14;
+          const force = ((blastRadius - dist) / blastRadius) * 2.2;
           p.vx += (dx / dist) * force;
           p.vy += (dy / dist) * force;
         }
@@ -1131,11 +1126,9 @@ Yêu cầu:
     function animateParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // A. Vẽ & cập nhật hạt nền vũ trụ
       for (let i = 0; i < particles.length; i++) {
         let p = particles[i];
 
-        // Vật lý né chuột quán tính
         if (mouse.x !== null && mouse.y !== null) {
           const dx = p.x - mouse.x;
           const dy = p.y - mouse.y;
@@ -1150,7 +1143,6 @@ Yêu cầu:
           }
         }
 
-        // Ma sát giảm chấn
         p.vx = p.vx * 0.94 + p.baseVx * 0.06;
         p.vy = p.vy * 0.94 + p.baseVy * 0.06;
 
@@ -1171,7 +1163,6 @@ Yêu cầu:
         ctx.fill();
       }
 
-      // Nối chùm sao gần nhau
       ctx.beginPath();
       ctx.strokeStyle = 'rgba(56, 189, 248, 0.12)';
       ctx.lineWidth = 0.5;
@@ -1187,11 +1178,11 @@ Yêu cầu:
       }
       ctx.stroke();
 
-      // B. Vẽ vòng sóng xung kích lan tỏa khi click
+      // Vẽ vòng sóng thanh mảnh nhẹ nhàng
       for (let i = clickRipples.length - 1; i >= 0; i--) {
         const rip = clickRipples[i];
-        rip.r += 4.5;
-        rip.alpha -= 0.038;
+        rip.r += 1.8;
+        rip.alpha -= 0.03;
         if (rip.alpha <= 0 || rip.r >= rip.maxR) {
           clickRipples.splice(i, 1);
           continue;
@@ -1199,17 +1190,17 @@ Yêu cầu:
         ctx.beginPath();
         ctx.arc(rip.x, rip.y, rip.r, 0, Math.PI * 2);
         ctx.strokeStyle = `rgba(${rip.color}, ${rip.alpha})`;
-        ctx.lineWidth = 2.2;
+        ctx.lineWidth = 1.2;
         ctx.stroke();
       }
 
-      // C. Vẽ các tia sáng pháo hoa bùng nổ khi click
+      // Vẽ các đốm sáng nhỏ li ti
       for (let i = clickSparks.length - 1; i >= 0; i--) {
         const s = clickSparks[i];
         s.x += s.vx;
         s.y += s.vy;
-        s.vx *= 0.94;
-        s.vy *= 0.94;
+        s.vx *= 0.92;
+        s.vy *= 0.92;
         s.alpha -= s.decay;
 
         if (s.alpha <= 0) {
