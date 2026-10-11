@@ -36,7 +36,6 @@
       position: relative;
     }
 
-    /* Canvas chứa hạt vũ trụ & hiệu ứng click */
     #space-canvas {
       position: fixed;
       top: 0;
@@ -93,10 +92,7 @@
       user-select: none;
       transition: transform 0.15s ease;
     }
-
-    .brand:active {
-      transform: scale(0.97);
-    }
+    .brand:active { transform: scale(0.97); }
 
     .brand-logo {
       width: 42px;
@@ -151,9 +147,7 @@
       background: rgba(56, 189, 248, 0.1);
     }
 
-    .nav-btn:active {
-      transform: scale(0.96);
-    }
+    .nav-btn:active { transform: scale(0.96); }
 
     .nav-btn.active {
       color: #fff;
@@ -246,24 +240,17 @@
       user-select: none;
     }
 
-    .btn:active {
-      transform: scale(0.96);
-    }
+    .btn:active { transform: scale(0.96); }
 
     .btn-glow {
       background: linear-gradient(135deg, #38bdf8, #6366f1);
       color: #070913;
       box-shadow: 0 10px 25px -4px rgba(56, 189, 248, 0.45);
     }
-
     .btn-glow:hover {
       transform: translateY(-2px);
       box-shadow: 0 14px 32px rgba(99, 102, 241, 0.55);
       color: #fff;
-    }
-
-    .btn-glow:active {
-      transform: scale(0.96) translateY(0);
     }
 
     .btn-glass {
@@ -271,14 +258,9 @@
       color: white;
       border: 1px solid var(--border);
     }
-
     .btn-glass:hover {
       background: rgba(255, 255, 255, 0.12);
       transform: translateY(-2px);
-    }
-
-    .btn-glass:active {
-      transform: scale(0.96) translateY(0);
     }
 
     .cards-grid {
@@ -303,10 +285,7 @@
       border-color: rgba(255, 255, 255, 0.25);
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
     }
-
-    .card:active {
-      transform: scale(0.98);
-    }
+    .card:active { transform: scale(0.98); }
 
     .card-icon {
       width: 52px;
@@ -318,7 +297,6 @@
       font-size: 1.4rem;
       margin-bottom: 20px;
     }
-
     .ic-cyan { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
     .ic-rose { background: rgba(244, 63, 94, 0.15); color: #f43f5e; }
     .ic-purple { background: rgba(168, 85, 247, 0.15); color: #a855f7; }
@@ -342,6 +320,32 @@
       gap: 14px;
     }
 
+    .section-category {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #cbd5e1;
+      margin: 28px 0 16px;
+    }
+    .section-category span {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .badge-tag {
+      font-size: 0.72rem;
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-official { background: rgba(244, 63, 94, 0.18); color: #fda4af; border: 1px solid rgba(244, 63, 94, 0.4); }
+    .badge-mock { background: rgba(56, 189, 248, 0.18); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.4); }
+
     .file-card {
       display: flex;
       align-items: center;
@@ -351,9 +355,15 @@
       border: 1px solid var(--border);
       border-radius: 18px;
       margin-bottom: 16px;
+      transition: all 0.25s ease;
+    }
+    .file-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateX(4px);
+      border-color: rgba(56, 189, 248, 0.35);
     }
 
-    /* Giao diện 40 Câu Thi Thử */
+    /* 40 câu hỏi thi thử */
     .quiz-nav-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(42px, 1fr));
@@ -377,21 +387,9 @@
       cursor: pointer;
       transition: all 0.15s;
     }
-
-    .q-jump-btn:hover {
-      background: rgba(56, 189, 248, 0.15);
-      color: var(--primary);
-    }
-
-    .q-jump-btn:active {
-      transform: scale(0.92);
-    }
-
-    .q-jump-btn.answered {
-      background: rgba(56, 189, 248, 0.25);
-      border-color: var(--primary);
-      color: #fff;
-    }
+    .q-jump-btn:hover { background: rgba(56, 189, 248, 0.15); color: var(--primary); }
+    .q-jump-btn:active { transform: scale(0.92); }
+    .q-jump-btn.answered { background: rgba(56, 189, 248, 0.25); border-color: var(--primary); color: #fff; }
 
     .quiz-question-box {
       background: rgba(255, 255, 255, 0.02);
@@ -425,44 +423,18 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-
-    .option-label:hover {
-      background: rgba(56, 189, 248, 0.08);
-      border-color: rgba(56, 189, 248, 0.4);
-    }
-
-    .option-label:active {
-      transform: scale(0.99);
-    }
-
-    .option-label.correct {
-      background: rgba(34, 197, 94, 0.15) !important;
-      border-color: var(--success) !important;
-      color: #86efac;
-    }
-
-    .option-label.wrong {
-      background: rgba(244, 63, 94, 0.15) !important;
-      border-color: var(--accent) !important;
-      color: #fda4af;
-    }
+    .option-label:hover { background: rgba(56, 189, 248, 0.08); border-color: rgba(56, 189, 248, 0.4); }
+    .option-label:active { transform: scale(0.99); }
+    .option-label.correct { background: rgba(34, 197, 94, 0.15) !important; border-color: var(--success) !important; color: #86efac; }
+    .option-label.wrong { background: rgba(244, 63, 94, 0.15) !important; border-color: var(--accent) !important; color: #fda4af; }
 
     .tf-table {
       width: 100%;
       border-collapse: collapse;
       margin-bottom: 16px;
     }
-
-    .tf-table th, .tf-table td {
-      padding: 10px 14px;
-      border: 1px solid var(--border);
-      font-size: 0.92rem;
-    }
-
-    .tf-table th {
-      background: rgba(255, 255, 255, 0.05);
-      text-align: center;
-    }
+    .tf-table th, .tf-table td { padding: 10px 14px; border: 1px solid var(--border); font-size: 0.92rem; }
+    .tf-table th { background: rgba(255, 255, 255, 0.05); text-align: center; }
 
     .input-answer {
       width: 100%;
@@ -499,15 +471,7 @@
       gap: 8px;
       transition: all 0.2s;
     }
-
-    .ai-btn:hover {
-      background: rgba(168, 85, 247, 0.3);
-      color: #fff;
-    }
-
-    .ai-btn:active {
-      transform: scale(0.96);
-    }
+    .ai-btn:hover { background: rgba(168, 85, 247, 0.3); color: #fff; }
 
     .api-key-config {
       background: rgba(0, 0, 0, 0.3);
@@ -531,6 +495,97 @@
       flex: 1;
       min-width: 250px;
     }
+
+    /* ================= GHIBLI-STYLE FLOATING CONTACT BUTTONS ================= */
+    .ghibli-contact-dock {
+      position: fixed;
+      bottom: 26px;
+      right: 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 99999;
+      user-select: none;
+    }
+
+    .ghibli-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 44% 56% 52% 48% / 48% 46% 54% 52%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      text-decoration: none;
+      position: relative;
+      cursor: pointer;
+      border: 2px solid rgba(255, 255, 255, 0.55);
+      box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.45),
+        inset 0 3px 5px rgba(255, 255, 255, 0.45),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.25);
+      animation: ghibliFloat 4.5s ease-in-out infinite alternate;
+      transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .ghibli-btn:hover {
+      transform: scale(1.15) rotate(-3deg);
+      border-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 
+        0 12px 26px rgba(0, 0, 0, 0.55),
+        inset 0 4px 6px rgba(255, 255, 255, 0.6);
+    }
+
+    .ghibli-btn:active {
+      transform: scale(0.92);
+    }
+
+    /* Phong cách Facebook Ghibli (Màu biển hoàng hôn / Trời chiều êm dịu) */
+    .ghibli-fb {
+      background: linear-gradient(145deg, #4b86d4, #2a5a9e);
+      animation-delay: 0s;
+    }
+
+    /* Phong cách Zalo Ghibli (Màu trời ngọc lam / Suối trong mát) */
+    .ghibli-zalo {
+      background: linear-gradient(145deg, #3aa9e9, #1c7bb5);
+      animation-delay: -2.2s;
+    }
+
+    /* Logo chi tiết bên trong */
+    .ghibli-icon {
+      filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3));
+    }
+
+    /* Tooltip tranh màu nước */
+    .ghibli-tag {
+      position: absolute;
+      right: 60px;
+      background: rgba(13, 20, 36, 0.92);
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      color: #f8fafc;
+      padding: 5px 12px;
+      border-radius: 12px 4px 12px 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: all 0.2s ease;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .ghibli-btn:hover .ghibli-tag {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    @keyframes ghibliFloat {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-6px) rotate(2deg); }
+      100% { transform: translateY(0px) rotate(-1deg); }
+    }
   </style>
 </head>
 <body>
@@ -539,6 +594,25 @@
 
   <div class="glow-light glow-1"></div>
   <div class="glow-light glow-2"></div>
+
+  <!-- NÚT LIÊN HỆ FACEBOOK & ZALO PHONG CÁCH GHIBLI BÉ BÉ -->
+  <div class="ghibli-contact-dock">
+    <!-- Facebook -->
+    <a href="https://www.facebook.com/nr.luongducbay" target="_blank" rel="noopener noreferrer" class="ghibli-btn ghibli-fb" title="Facebook Lương Đức Bảy">
+      <svg class="ghibli-icon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      </svg>
+      <span class="ghibli-tag">💬 Nhắn Facebook</span>
+    </a>
+
+    <!-- Zalo -->
+    <a href="https://zalo.me/0397696532" target="_blank" rel="noopener noreferrer" class="ghibli-btn ghibli-zalo" title="Zalo: 0397696532">
+      <svg class="ghibli-icon" width="23" height="23" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C6.48 2 2 6.03 2 11c0 2.87 1.5 5.42 3.82 7.03-.17.96-.64 2.53-.73 2.88-.12.44.15.43.32.32.22-.15 2.54-1.74 3.53-2.43.99.27 2.03.42 3.06.42 5.52 0 10-4.03 10-9s-4.48-9-10-9zm-3.6 11.5c-.33 0-.6-.27-.6-.6v-3.8c0-.33.27-.6.6-.6h3.2c.33 0 .6.27.6.6s-.27.6-.6.6H9.6v1.1h1.8c.33 0 .6.27.6.6s-.27.6-.6.6H9.6v1h2c.33 0 .6.27.6.6s-.27.6-.6.6H8.4zm6.5 0c-.33 0-.6-.27-.6-.6v-3.8c0-.33.27-.6.6-.6s.6.27.6.6v3.8c0 .33-.27.6-.6.6z"/>
+      </svg>
+      <span class="ghibli-tag">🌿 Nhắn Zalo: 0397696532</span>
+    </a>
+  </div>
 
   <div class="app-container">
     <header class="navbar">
@@ -570,7 +644,7 @@
     <section class="tab-view" id="tab-home" style="display: block;">
       <div class="hero">
         <div class="tag-badge">
-          ⚡ Ngân hàng đề thi tư duy Toán học mới nhất
+          ⚡ Ngân hàng đề thi tư duy Toán học mới nhất[cite: 73]
         </div>
         <h1 class="hero-h1">
           KHO ĐỀ THI THỬ <br>
@@ -586,6 +660,9 @@
           </button>
           <button class="btn btn-glass" onclick="switchTab('tsa')">
             🎓 Xem Đề Thi TSA
+          </button>
+          <button class="btn btn-glass" onclick="switchTab('hsa')">
+            📖 Xem Đề Thi HSA
           </button>
         </div>
       </div>
@@ -603,7 +680,7 @@
           <div class="card-icon ic-cyan">🎓</div>
           <h3 style="margin-bottom: 8px;">Kỳ Thi TSA (ĐHBK Hà Nội)</h3>
           <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
-            Đề thi chính thức đợt 1 2026 (AECK) với 57 trang có lời giải đầy đủ[cite: 9, 10].
+            Gồm đề chính thức đợt 1 2026 (AECK 57 trang) và bộ sưu tập đề thi thử tuyển chọn[cite: 9, 10].
           </p>
         </div>
 
@@ -611,7 +688,7 @@
           <div class="card-icon ic-rose">📖</div>
           <h3 style="margin-bottom: 8px;">Kỳ Thi HSA (ĐHQG Hà Nội)</h3>
           <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6;">
-            Đề thi Đánh giá năng lực: Định lượng, Định tính và Khoa học đang được cập nhật.
+            Kho đề thi Đánh giá năng lực: Đề thi chính thức các đợt và đề thi thử định lượng, định tính.
           </p>
         </div>
       </div>
@@ -655,17 +732,22 @@
       </div>
     </section>
 
-    <!-- TAB 3: ĐỀ THI TSA -->
+    <!-- TAB 3: ĐỀ THI TSA (PHÂN BIỆT CHÍNH THỨC & THI THỬ) -->
     <section class="tab-view" id="tab-tsa" style="display: none;">
       <div class="panel">
         <div class="panel-header">
           <div>
-            <h2 style="font-size: 1.55rem; font-weight: 800;">🎓 Đề Thi Đánh Giá Tư Duy (TSA)</h2>
-            <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 4px;">Tổng hợp đề thi chính thức và đề thi thử TSA Đại học Bách Khoa Hà Nội</p>
+            <h2 style="font-size: 1.55rem; font-weight: 800;">🎓 Kho Đề Thi Đánh Giá Tư Duy (TSA)</h2>
+            <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 4px;">Tổng hợp đề thi chính thức và đề thi thử Đại học Bách Khoa Hà Nội</p>
           </div>
           <button class="btn btn-glass" onclick="switchTab('home')" style="padding: 8px 16px; font-size: 0.85rem;">
             ← Về Trang Chủ
           </button>
+        </div>
+
+        <div class="section-category">
+          <span>🔥 ĐỀ THI CHÍNH THỨC</span>
+          <span class="badge-tag badge-official">CHÍNH THỨC</span>
         </div>
 
         <div class="file-card">
@@ -687,26 +769,91 @@
             </a>
           </div>
         </div>
+
+        <div class="section-category">
+          <span>⚡ ĐỀ THI THỬ & ÔN LUYỆN</span>
+          <span class="badge-tag badge-mock">THI THỬ</span>
+        </div>
+
+        <div class="file-card">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div style="font-size: 2.2rem; color: #38bdf8;">📝</div>
+            <div>
+              <div style="font-weight: 800; font-size: 1.05rem; color: #fff;">Đề thi thử Tư duy Toán học #01 - ThinkBasic</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">
+                Đề chuẩn cấu trúc 40 câu • Có đáp án chi tiết & giải thích bản chất
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <button class="btn btn-glow" style="padding: 8px 18px; font-size: 0.85rem;" onclick="switchTab('exam')">
+              ⚡ Vào làm ngay
+            </button>
+          </div>
+        </div>
+
+        <div class="file-card">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div style="font-size: 2.2rem; color: #818cf8;">📑</div>
+            <div>
+              <div style="font-weight: 800; font-size: 1.05rem; color: #fff;">Đề thi thử TSA Đợt 2 - Phát triển từ đề chính thức</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">
+                Hệ thống đang phục dựng đề & ma trận kiến thức • Sắp cập nhật
+              </div>
+            </div>
+          </div>
+          <span style="font-size: 0.82rem; color: #64748b; font-weight: 700;">Đang chuẩn bị...</span>
+        </div>
       </div>
     </section>
 
-    <!-- TAB 4: ĐỀ THI HSA -->
+    <!-- TAB 4: ĐỀ THI HSA (PHÂN BIỆT CHÍNH THỨC & THI THỬ) -->
     <section class="tab-view" id="tab-hsa" style="display: none;">
       <div class="panel">
         <div class="panel-header">
           <div>
-            <h2 style="font-size: 1.55rem; font-weight: 800;">📖 Đề Thi Đánh Giá Năng Lực (HSA)</h2>
-            <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 4px;">Kho đề thi Đánh giá năng lực Đại học Quốc gia Hà Nội</p>
+            <h2 style="font-size: 1.55rem; font-weight: 800;">📖 Kho Đề Thi Đánh Giá Năng Lực (HSA)</h2>
+            <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 4px;">Tổng hợp đề thi chính thức và đề thi thử Đại học Quốc gia Hà Nội</p>
           </div>
           <button class="btn btn-glass" onclick="switchTab('home')" style="padding: 8px 16px; font-size: 0.85rem;">
             ← Về Trang Chủ
           </button>
         </div>
 
-        <div style="text-align: center; padding: 60px 20px; color: #64748b;">
-          <div style="font-size: 3rem; margin-bottom: 16px;">☁️</div>
-          <h3 style="color: #cbd5e1; margin-bottom: 8px;">Chưa có tài liệu trong mục này</h3>
-          <p style="font-size: 0.9rem;">Hệ thống đang tổng hợp và sẽ sớm cập nhật các bộ đề thi thử HSA 2026.</p>
+        <div class="section-category">
+          <span>🔥 ĐỀ THI CHÍNH THỨC</span>
+          <span class="badge-tag badge-official">CHÍNH THỨC</span>
+        </div>
+
+        <div class="file-card">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div style="font-size: 2.2rem; color: #f43f5e;">📄</div>
+            <div>
+              <div style="font-weight: 800; font-size: 1.05rem; color: #fff;">Đề tham khảo chính thức ĐHQGHN 2026</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">
+                Cấu trúc 150 câu • Định lượng, Định tính và Khoa học tự nhiên - xã hội
+              </div>
+            </div>
+          </div>
+          <span style="font-size: 0.82rem; color: #64748b; font-weight: 700;">Đang cập nhật...</span>
+        </div>
+
+        <div class="section-category">
+          <span>⚡ ĐỀ THI THỬ & LUYỆN TẬP</span>
+          <span class="badge-tag badge-mock">THI THỬ</span>
+        </div>
+
+        <div class="file-card">
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div style="font-size: 2.2rem; color: #38bdf8;">📝</div>
+            <div>
+              <div style="font-weight: 800; font-size: 1.05rem; color: #fff;">Đề rèn luyện tư duy Định lượng HSA #01</div>
+              <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 4px;">
+                50 câu Toán học & Tư duy định lượng có đáp án giải thích
+              </div>
+            </div>
+          </div>
+          <span style="font-size: 0.82rem; color: #64748b; font-weight: 700;">Sắp ra mắt</span>
         </div>
       </div>
     </section>
@@ -1047,9 +1194,7 @@ Yêu cầu:
     window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
     window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
 
-    // HIỆU ỨNG CLICK NHẸ NHÀNG, TINH TẾ (MICRO-INTERACTION)
     window.addEventListener('click', function(e) {
-      // 1. Vòng sóng lan tỏa nhỏ gọn, thanh thoát (max 35px)
       clickRipples.push({
         x: e.clientX,
         y: e.clientY,
@@ -1059,7 +1204,6 @@ Yêu cầu:
         color: '56, 189, 248'
       });
 
-      // 2. Một vài đốm sáng nhỏ li ti (8 đốm sáng bay nhẹ, tan biến êm)
       const sparkColors = ['56, 189, 248', '129, 140, 248', '255, 255, 255'];
       for (let i = 0; i < 8; i++) {
         const angle = Math.random() * Math.PI * 2;
@@ -1076,7 +1220,6 @@ Yêu cầu:
         });
       }
 
-      // 3. Tác động nhẹ nhàng lên hạt nền xung quanh
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         const dx = p.x - e.clientX;
@@ -1178,7 +1321,6 @@ Yêu cầu:
       }
       ctx.stroke();
 
-      // Vẽ vòng sóng thanh mảnh nhẹ nhàng
       for (let i = clickRipples.length - 1; i >= 0; i--) {
         const rip = clickRipples[i];
         rip.r += 1.8;
@@ -1194,7 +1336,6 @@ Yêu cầu:
         ctx.stroke();
       }
 
-      // Vẽ các đốm sáng nhỏ li ti
       for (let i = clickSparks.length - 1; i >= 0; i--) {
         const s = clickSparks[i];
         s.x += s.vx;
